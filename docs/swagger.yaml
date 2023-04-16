@@ -1,0 +1,412 @@
+basePath: /api/v1
+definitions:
+  models.Comment:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      message:
+        type: string
+      photo:
+        $ref: '#/definitions/models.Photo'
+      photoID:
+        type: integer
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.Photo:
+    properties:
+      caption:
+        type: string
+      coments:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.SocialMedia:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userID:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      age:
+        type: integer
+      coments:
+        items:
+          $ref: '#/definitions/models.Comment'
+        type: array
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      photos:
+        items:
+          $ref: '#/definitions/models.Photo'
+        type: array
+      social_medias:
+        items:
+          $ref: '#/definitions/models.SocialMedia'
+        type: array
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: dhaniaffa@gmail.com
+    name: Dhaniaffa Adhimastama Mahadika
+    url: https://github.com/dhaniaffa
+  description: Dokumentasi Tugas FInal Projek
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Documentation myGram Final Project Hactivt8
+  version: "1.0"
+paths:
+  /comment:
+    get:
+      consumes:
+      - application/json
+      description: Get All Comment By User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Get All Comment Endpoint
+      tags:
+      - comment
+  /comment/{commentId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Comment By ID
+      parameters:
+      - description: ID of the comment
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Delete Comment Endpoint
+      tags:
+      - comment
+    get:
+      consumes:
+      - application/json
+      description: Get One Comment By Post Photo & User
+      parameters:
+      - description: ID of the comment
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Get One Comment Endpoint
+      tags:
+      - comment
+    put:
+      consumes:
+      - application/json
+      description: Update Comment By ID
+      parameters:
+      - description: ID of the comment
+        in: path
+        name: commentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Update Comment Endpoint
+      tags:
+      - comment
+  /comment/post/{photoId}:
+    post:
+      consumes:
+      - application/json
+      description: Create Comment
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: photoId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      summary: Create Comment Endpoint
+      tags:
+      - comment
+  /photo:
+    get:
+      consumes:
+      - application/json
+      description: Get All Photo By User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Get All Photo Endpoint
+      tags:
+      - photo
+    post:
+      consumes:
+      - application/json
+      description: Create Photo
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Create Photo Endpoint
+      tags:
+      - photo
+  /social-media:
+    get:
+      consumes:
+      - application/json
+      description: Get All Social Media User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Get All Social Media Endpoint
+      tags:
+      - socialmedia
+    post:
+      consumes:
+      - application/json
+      description: Create Social Media
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Create Social Media Endpoint
+      tags:
+      - socialmedia
+  /social-media/{photoId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Photo By ID
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: photoId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Delete Photo Endpoint
+      tags:
+      - photo
+    get:
+      consumes:
+      - application/json
+      description: Get One Photo By User
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: photoId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Get One Photo Endpoint
+      tags:
+      - photo
+    put:
+      consumes:
+      - application/json
+      description: Update Photo By ID
+      parameters:
+      - description: ID of the photo
+        in: path
+        name: photoId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      summary: Update Photo Endpoint
+      tags:
+      - photo
+  /social-media/{sosmedId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Social Media By ID
+      parameters:
+      - description: ID of the social media
+        in: path
+        name: sosmedId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Delete Social Media Endpoint
+      tags:
+      - socialmedia
+    get:
+      consumes:
+      - application/json
+      description: Get One Social Media User
+      parameters:
+      - description: ID of the social media
+        in: path
+        name: sosmedId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Get All Social Media Endpoint
+      tags:
+      - socialmedia
+    put:
+      consumes:
+      - application/json
+      description: Update Social Media By ID
+      parameters:
+      - description: ID of the social media
+        in: path
+        name: sosmedId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      summary: Update Social Media Endpoint
+      tags:
+      - socialmedia
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: User Login
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: User Login Endpoint
+      tags:
+      - user
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: User Register
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: User Register Endpoint
+      tags:
+      - user
+swagger: "2.0"
